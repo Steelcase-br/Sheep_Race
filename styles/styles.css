@@ -853,4 +853,55 @@ body, html {
   animation: walk  11s  linear infinite;
   animation-delay: 0.5s;
 }
+.pregunta {
+  position: absolute;
+  top: 55%;           /* mueve el bloque hacia arriba */
+  bottom: auto;       /* anula el bottom anterior */
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;         /* casi todo el ancho en móvil */
+  max-width: 600px;   /* límite en pantallas grandes */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.pregunta-texto {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 160px;  /* separa la pregunta de los botones */
+}
+
+.respuestas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 0;        /* no quedó margen extra, lo controlamos con margin-bottom de .pregunta-texto */
+}
+
+.respuesta {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.respuesta:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Ajustes para pantallas muy estrechas */
+@media (max-width: 400px) {
+  .pregunta {
+    top: 50%;
+  }
+  .respuestas {
+    grid-template-columns: 1fr;  /* un botón por fila */
+  }
+}
 
