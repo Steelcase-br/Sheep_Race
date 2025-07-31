@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Ganadores Borregos!</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body class="ganadores">
+
+  <!-- ✅ Fondo y Podium (antes del contenedor de borregos) -->
+  <img src="assets/pantalla-final/fondo-ganadores.svg" class="fondo-ganadores" alt="Fondo ganadores" />
+  <img src="assets/pantalla-final/podium.svg" class="podium-final" alt="Podium" />
+<div id="fuegos"></div>
+
+  <!-- 🐏 Borregos en el podio -->
+  <div id="podium-lugares">
+    <div class="lugar-final segundo">
+      <img src="assets/pantalla-final/segundo-lugar.svg" alt="2do lugar" />
+      <div class="borrego-ganador" id="2nombre"></div>
+    </div>
+    <div class="lugar-final primero">
+      <img src="assets/pantalla-final/primer-lugar.svg" alt="1er lugar" />
+      <div class="borrego-ganador" id="1nombre"></div>
+    </div>
+    <div class="lugar-final tercero">
+      <img src="assets/pantalla-final/tercer-lugar.svg" alt="3er lugar" />
+      <div class="borrego-ganador" id="3nombre"></div>
+    </div>
+  </div>
+
+ <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<!-- Lógica interna para fuegos y ganadores -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDapPU15NDHsuWxFhPELeqQBA3sYpey6LI",
+    authDomain: "steelcase-juego.firebaseapp.com",
+    databaseURL: "https://steelcase-juego-default-rtdb.firebaseio.com",
+    projectId: "steelcase-juego",
+    storageBucket: "steelcase-juego.appspot.com",
+    messagingSenderId: "397340237973",
+    appId: "1:397340237973:web:909ec0ffb18725f86e3b9c"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  function spawnFuegos() {
+    const cont = document.getElementById('fuegos');
+    if (!cont) return;
+    const tipos = ['s1', 's2', 's3'];
+    for (let i = 0; i < 12; i++) {
+      const f = document.createElement('img');
+      const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+      f.src = `assets/pantalla-final/${tipo}.svg`;
+      f.style.left = (Math.random() * 90) + '%';
+      f.style.top = (Math.random() * 30) + '%';
+      f.style.animationDelay = (Math.random() * 1.5) + 's';
+      f.onerror = () => console.error("Error al cargar fuego:", f.src);
+      cont.appendChild(f);
+    }
+  }
+
+  function determinarGanadores() {
+    db.ref("borregos").once("value", snapshot => {
+      const datos = snapshot.val();
+      if (!datos) return;
+
+      const jugadores = Object.values(datos)
+        .filter(j => j.estado === "vivo" || j.estado === "fin")
+        .map(j => ({
+          nombre: j.nombre,
+          aciertos: j.aciertos || 0,
+          tiempo: j.tiempo || Infinity
+        }));
+
+      jugadores.sort((a, b) => {
+        if (b.aciertos !== a.aciertos) return b.aciertos - a.aciertos;
+        return a.tiempo - b.tiempo;
+      });
+
+      [1, 2, 3].forEach((n, i) => {
+        const nombre = jugadores[i]?.nombre || "—";
+        const el = document.getElementById(`${n}nombre`);
+        if (el) el.textContent = nombre;
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    spawnFuegos();
+    determinarGanadores();
+  });
+</script>
+</body>
+</html>
+
+</body>
+</html>

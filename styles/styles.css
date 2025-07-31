@@ -1,0 +1,843 @@
+@font-face {
+  font-family: 'Minecraft';
+  src: url('../fonts/Minecraft.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ======== REGLAS GENERALES ======== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Minecraft', sans-serif;
+  background-color: #f2f2f2;
+  overflow: hidden;
+}
+
+/* ======== PANTALLA JUGADOR ======== */
+#pantalla-jugador {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.fondo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.borrego-contenedor {
+  position: absolute;
+  bottom: 140px;
+  left: 50px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+}
+
+#nombre-borrego {
+
+  font-weight: bold;
+  font-size: 20px;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
+
+.pregunta {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 60%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.pregunta-texto {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.respuestas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.respuesta {
+  padding: 12px;
+  background-color: #eee;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.respuesta:hover {
+  background-color: #ccc;
+}
+
+#contenedor-borregos {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  right: 0;
+  height: 150px;
+  z-index: 2;
+}
+
+.borrego-espectador {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: left 0.5s ease;
+  
+}
+
+.borrego-espectador img {
+  width: 80px;
+  height: auto;
+}
+
+.borrego-espectador span {
+  background: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+  font-weight: bold;
+}
+
+/* ======== PANTALLA DE REGISTRO (NUEVO DISEÑO) ======== */
+#pantalla-registro {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#pantalla-registro .fondo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* Contenedor que centra los elementos */
+.registro-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Espacio entre elementos */
+}
+.imagotipo{
+width: 800px;
+margin-top: -230px;
+  position: relative;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+ 
+}
+/* Título */
+.titulo-borrego {
+   margin-top: 10px;
+  width: 80%;
+  max-width: 400px;
+}
+
+/* Borrego animado */
+.borrego-inicio {
+  margin-top: 30px;
+   text-align: center;
+  width: 200px;
+  animation: brincar 1.5s ease-in-out infinite;
+}
+@keyframes brincar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Input de nombre */
+.nombre-editable {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+ text-align: center;
+  outline: none;
+  border: none;    /* Ya elimina cualquier borde */
+  background: none;
+  cursor: text;
+}
+
+/* Botón Start Game */
+.boton-start {
+  margin-top: 30px;
+  width: 200px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.boton-start:hover {
+  transform: scale(1.05);
+}
+
+/* ======== QR Y CONTADOR ======== */
+.contenedor-qr {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.codigo-qr {
+  width: 250px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.mensaje-bienvenida {
+  font-size: 24px;
+  font-weight: bold;
+  background: white;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+#contador-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#contador-imagen {
+  width: 250px;
+  height: auto;
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* === NUEVO DISEÑO JUGADOR === */
+
+.nube {
+  position: absolute;
+  top: 50px;
+  width: 120px;
+  animation: moverNube 20s linear infinite;
+  z-index: 1;
+}
+.nube1 { top: 50px; left: -150px; animation-delay: 0s; }
+.nube2 { top: 100px; left: -250px; animation-delay: 5s; }
+.nube3 { top: 150px; left: -350px; animation-delay: 10s; }
+
+@keyframes moverNube {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(120vw); }
+}
+
+/* Pregunta con fondo SVG */
+.pregunta {
+  position: relative;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  max-width: 800px;
+  text-align: center;
+  z-index: 3;
+}
+
+.pregunta-bg {
+  width: 100%;
+  display: block;
+  margin-bottom: -150px;
+}
+
+.pregunta-texto {
+  font-family: sans-serif;
+  font-size: 22px;
+  color: #000;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.respuestas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.respuesta {
+  padding: 12px;
+  background-color: #eee;
+  border: none;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.respuesta:hover { background-color: #ccc; }
+
+/* Obstáculos */
+#obstaculos {
+  position: absolute;
+  bottom: 120px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 2;
+}
+
+#obstaculos img {
+  position: absolute;
+  bottom: 0;
+  width: 80px;
+  animation: moverObstaculo 5s linear infinite;
+}
+
+@keyframes moverObstaculo {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-120px); }
+}
+
+/* Borrego animado */
+#borrego {
+  width: 120px;
+  transition: transform 0.3s;
+}
+
+#borrego.saltar {
+  animation: saltar 0.5s ease;
+}
+
+@keyframes saltar {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-80px); }
+  100% { transform: translateY(0); }
+}
+/* ==== PREGUNTAS ==== */
+.pregunta-container {
+  position: absolute;
+  top:30%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 800px;
+}
+
+.pregunta-texto {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 70px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.pregunta-rect {
+  position: relative;
+  width: 100%;
+}
+
+.rectangulo-preguntas {
+  width: 100%;
+  display: block;
+}
+
+.respuestas {
+   margin-top: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.respuesta {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.respuesta:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+}
+.obstaculo-animado {
+  position: absolute;
+  bottom: 140px; /*  Igual que el borrego */
+  right: -100px;
+  width: 80px;
+  animation: moverObstaculo 6s linear infinite;
+}
+
+@keyframes moverObstaculo {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120vw); }
+}
+
+.retroceder {
+  animation: reboteObstaculo 0.3s ease;
+}
+
+@keyframes reboteObstaculo {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
+}
+
+.bandera-meta {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: auto;
+  display: none;
+  z-index: 5;
+}
+
+.meta-mover {
+  animation: moverBandera 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes moverBandera {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  100% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.borrego-gana {
+  animation: correrVictoria 3s ease-out forwards;
+}
+
+@keyframes correrVictoria {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100vw); } /* cruza toda la pantalla */
+}
+/* Caminata lenta constante (simulación de avance) */
+.borrego-caminando {
+  animation: caminarLento 30s linear forwards;
+}
+
+@keyframes caminarLento {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(40vw); } /* Llega al medio de la pantalla */
+}
+
+/* Sprint final */
+.borrego-gana {
+  animation: correrVictoria 3s ease-out forwards;
+}
+
+@keyframes correrVictoria {
+  0% { transform: translateX(40vw); }
+  100% { transform: translateX(100vw); }
+}
+
+
+.boton-start {
+  cursor: pointer;
+}
+
+
+.boton-start {
+  background: url('../assets/pantalla-registro/boton-startgame.svg') no-repeat center;
+  background-size: contain;
+  width: 200px;
+  height: 70px;
+  border: none;
+  cursor: pointer;
+}
+#contenedor-borregos {
+  position: absolute;
+  bottom: 140px;
+  left: 0;
+  right: 0;
+  height: 150px;
+  z-index: 2;
+}
+
+/* 🔥 ESTILOS DE LA PANTALLA DE GANADORES 🔥 */
+
+body.ganadores {
+  overflow: hidden;
+}
+
+.ganadores-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.fondo-ganadores {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.podium-final {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  pointer-events: none;
+}
+
+#podium-lugares {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.lugar-final {
+  position: relative;
+  margin: 0 20px;
+  width: 150px;
+  text-align: center;
+}
+
+.lugar-final.primero {
+  animation: moveLR 2s infinite alternate ease-in-out;
+}
+
+.lugar-final.segundo {
+  transform: rotate(5deg);
+}
+
+.lugar-final.tercero {
+  animation: jump 1.5s infinite ease-in-out;
+}
+
+.borrego-ganador {
+  position: absolute;
+  top: -120px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+#fuegos img {
+  position: absolute;
+  width: 60px;
+  opacity: 0;
+  animation: fuegoZoom 1.5s infinite ease-out;
+}
+
+@keyframes moveLR {
+  from { transform: translateX(-10px); }
+  to   { transform: translateX(10px); }
+}
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  50%     { transform: translateY(-15px); }
+}
+
+@keyframes fuegoZoom {
+  0%   { opacity: 1; transform: scale(0.5); }
+  50%  { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* 🏁 FIN ESTILOS DE GANADORES */
+
+/* =====================
+   ESTILOS GANADORES 🎉
+   ===================== */
+
+body.ganadores {
+  overflow: hidden;
+}
+
+.ganadores-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Fondo */
+.fondo-ganadores {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Podio base */
+.podium-final {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  z-index: 2;
+}
+
+/* Contenedor de fuegos artificiales */
+#fuegos img {
+  position: absolute;
+  width: 50px;
+  opacity: 0;
+  animation: fuegoZoom 1.8s infinite ease-out;
+  z-index: 3;
+}
+
+/* Borregos en el podio */
+#podium-lugares {
+  position: absolute;
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 4;
+}
+
+/* Cada lugar (posición absoluta personalizada) */
+.lugar-final {
+  position: absolute;
+  width: 80px;
+  text-align: center;
+}
+
+.lugar-final.primero {
+  left: 46%;
+  transform: translateX(-50%);
+  bottom: 100px;
+  animation: moveLR .5s infinite alternate ease-in-out;
+  width: 100px;
+}
+
+.lugar-final.segundo {
+  left: 33%;
+  bottom: 40px;
+  width: 90px;
+  animation: tiltLR 1s infinite ease-in-out;
+  transform-origin: center bottom;
+}
+
+.lugar-final.tercero {
+  left: 59%;
+  bottom: 1px;
+  animation: jump .5s infinite ease-in-out;
+  width: 130px;
+}
+
+/* Nombre del borrego */
+.borrego-ganador {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Animaciones */
+@keyframes moveLR {
+  from { transform: translateX(-10px); }
+  to   { transform: translateX(10px); }
+}
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  50%     { transform: translateY(-12px); }
+}
+
+@keyframes fuegoZoom {
+  0%   { opacity: 1; transform: scale(0.5); }
+  50%  { transform: scale(1.3); opacity: 0.9; }
+  100% { transform: scale(0); opacity: 0; }
+}
+@keyframes tiltLR {
+  0%   { transform: rotate(-5deg); }
+  50%  { transform: rotate(5deg); }
+  100% { transform: rotate(-5deg); }
+}
+#fuegos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+#fuegos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+#fuegos img {
+  position: absolute;
+  width: 50px;
+  opacity: 0;
+  animation: fuegoZoom 1.8s infinite ease-out;
+}
+
+@keyframes fuegoZoom {
+  0%   { opacity: 1; transform: scale(0.5); }
+  50%  { transform: scale(1.3); opacity: 0.9; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  /* estilos para móviles y tablets */
+}
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.qr-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 1) Fondo a pantalla completa */
+.qr-screen .bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* 2) Texto “Escanéame” encima del QR */
+.qr-screen .scan-text {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* 3) QR centrado */
+.qr-screen .qr {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* 4) Contenedor donde se mueven los borregos */
+.qr-screen .sheep-container {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 5) Estilos generales de cada borrego */
+.qr-screen .sheep {
+  position: absolute;
+  bottom: 0;
+  width: 80px;           /* ajusta tamaño */
+  will-change: left, transform;
+}
+
+/* 6) Keyframes: camina ida y vuelta y gira al cambiar de dirección */
+@keyframes walk {
+  0%   { left: -100px;  transform: scaleX(1); }
+  45%  { left: calc(100% + 100px);  transform: scaleX(1); }
+  50%  { /* gira */ transform: scaleX(-1); }
+  95%  { left: -100px;  transform: scaleX(-1); }
+  100% { left: -100px;  transform: scaleX(1);  }
+}
+
+/* 7) Asigna la animación a cada borrego con duraciones y delays distintos */
+.sheep1 {
+  animation: walk  10s  linear infinite;
+}
+.sheep2 {
+  animation: walk  12s  linear infinite;
+  animation-delay: 2s;
+}
+.sheep3 {
+  animation: walk   8s  linear infinite;
+  animation-delay: 1s;
+}
+.sheep4 {
+  animation: walk  14s  linear infinite;
+  animation-delay: 3s;
+}
+.sheep5 {
+  animation: walk  11s  linear infinite;
+  animation-delay: 0.5s;
+}
+

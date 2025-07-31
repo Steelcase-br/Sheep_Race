@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jugador - Borregos Racers</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+  <div id="pantalla-jugador">
+    <!-- Fondo -->
+    <img src="assets/pantalla-jugador/fondo-carrera.svg" alt="Fondo carrera" class="fondo" />
+
+    <!-- Nubes -->
+    <img src="assets/pantalla-jugador/nube1.svg" alt="Nube" class="nube nube1" />
+    <img src="assets/pantalla-jugador/nube2.svg" alt="Nube" class="nube nube2" />
+    <img src="assets/pantalla-jugador/nube3.svg" alt="Nube" class="nube nube3" />
+
+    <!-- Borrego -->
+ <div class="borrego-contenedor" id="borrego-contenedor">
+  <span id="nombre-borrego">Nombre aquí</span>
+  <img src="assets/pantalla-jugador/borrego-jugador.svg" alt="Borrego" id="borrego" />
+</div>
+
+
+
+<!-- Bandera de meta -->
+<img src="assets/pantalla-jugador/bandera-meta.svg" alt="Meta" id="bandera-meta" class="bandera-meta" />
+
+<!-- Obstáculo -->
+<div id="obstaculo"></div>
+
+
+    <!-- Pregunta y Respuestas -->
+    <div class="pregunta-container">
+      <div class="pregunta-texto" id="pregunta-texto">¿Cuál es la capital de Francia?</div>
+      <div class="respuestas" id="respuestas">
+        <!-- Respuestas generadas por JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <!-- Firebase y lógica -->
+  <script src="js/firebase.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+

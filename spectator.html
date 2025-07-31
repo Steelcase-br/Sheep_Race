@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pantalla Pública - Borregos</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+  <div id="pantalla-espectador">
+    <!-- Fondo de carrera -->
+    <img src="assets/pantalla-espectador/fondo-carrera.svg" class="fondo" alt="Fondo carrera" />
+    <img src="assets/pantalla-jugador/nube1.svg" alt="Nube" class="nube nube1" />
+    <img src="assets/pantalla-jugador/nube2.svg" alt="Nube" class="nube nube2" />
+    <img src="assets/pantalla-jugador/nube3.svg" alt="Nube" class="nube nube3" />
+
+    <!-- Contenedor de borregos -->
+    <div id="contenedor-borregos"></div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+ <script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDapPU15NDHsuWxFhPELeqQBA3sYpey6LI",
+    authDomain: "steelcase-juego.firebaseapp.com",
+    databaseURL: "https://steelcase-juego-default-rtdb.firebaseio.com",
+    projectId: "steelcase-juego",
+    storageBucket: "steelcase-juego.appspot.com",
+    messagingSenderId: "397340237973",
+    appId: "1:397340237973:web:909ec0ffb18725f86e3b9c"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const contenedor = document.getElementById("contenedor-borregos");
+
+  // Escuchar cambios en tiempo real
+  db.ref("borregos").on("value", snapshot => {
+    contenedor.innerHTML = "";
+    const datos = snapshot.val();
+    if (!datos) return;
+
+    Object.values(datos).forEach(borrego => {
+      if (borrego.estado === "vivo") {
+        const div = document.createElement("div");
+        div.classList.add("borrego-espectador");
+        div.innerHTML = `
+          <img src="assets/pantalla-espectador/borrego-jugador.svg" />
+          <span style="color: ${borrego.color}">${borrego.nombre}</span>
+        `;
+        div.style.left = `${borrego.progreso}%`;
+        div.style.bottom = "-360px";
+        contenedor.appendChild(div);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
+
