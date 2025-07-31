@@ -871,14 +871,14 @@ body, html {
 .pregunta-texto {
   text-align: center;
   font-size: 18px;
-  margin-bottom: 160px;  /* separa la pregunta de los botones */
+  margin-bottom: 210px;  /* separa la pregunta de los botones */
 }
 
 .respuestas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
-  margin-top: 0;        /* no quedó margen extra, lo controlamos con margin-bottom de .pregunta-texto */
+  margin-top: 10px;        /* no quedó margen extra, lo controlamos con margin-bottom de .pregunta-texto */
 }
 
 .respuesta {
