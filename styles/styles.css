@@ -168,7 +168,7 @@ html, body, #game {
   gap: 20px; /* Espacio entre elementos */
 }
 .imagotipo{
-width: 800px;
+width: clamp(50px, 10vw, 120px);
 margin-top: -230px;
   position: relative;
   top: 10%;
