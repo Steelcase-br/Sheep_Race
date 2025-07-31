@@ -168,14 +168,12 @@ html, body, #game {
   gap: 20px; /* Espacio entre elementos */
 }
 .imagotipo{
-width: clamp(50px, 10vw, 120px);
-margin-top: -230px;
-  position: relative;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  
- 
+.imagotipo {
+  display: block;           /* para que margin auto funcione */
+  margin: 2vh auto;         /* 2vh arriba y abajo, auto a los lados */
+  width: clamp(50px, 10vw, 120px);
+  height: auto;
+}
 }
 /* Título */
 .titulo-borrego {
