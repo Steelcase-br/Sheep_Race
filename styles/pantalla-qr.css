@@ -1,0 +1,60 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.qr-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.qr-screen .bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.qr-screen .scan-text {
+  width: 300px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+.qr-screen .qr {
+  width: 300px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.qr-screen .sheep-container {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+.qr-screen .sheep {
+  position: absolute;
+  bottom: 0;
+  width: 150px;
+  will-change: left, transform;
+}
+@keyframes walk {
+  0%   { left: -100px;  transform: scaleX(1); }
+  45%  { left: calc(100% + 100px);  transform: scaleX(1); }
+  50%  { transform: scaleX(-1); }
+  95%  { left: -100px;  transform: scaleX(-1); }
+  100% { left: -100px;  transform: scaleX(1); }
+}
+.sheep1 { animation: walk 10s linear infinite; }
+.sheep2 { animation: walk 12s linear infinite; animation-delay: 2s; }
+.sheep3 { animation: walk 8s linear infinite; animation-delay: 1s; }
+.sheep4 { animation: walk 14s linear infinite; animation-delay: 3s; }
+.sheep5 { animation: walk 11s linear infinite; animation-delay: 0.5s; }
