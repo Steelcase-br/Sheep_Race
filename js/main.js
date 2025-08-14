@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --------------- SINCRONIZACIÓN INICIO GLOBAL ----------------
   function iniciarEsperaGlobal() {
     // Reinicia el cronómetro invisible a 50 segundos cada vez que alguien entra
-    db.ref('startCountdown').set(2);
+    db.ref('startCountdown').set(50);
 
     // Empieza a escuchar el valor del cronómetro
     intervaloGlobal = setInterval(() => {
